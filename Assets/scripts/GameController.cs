@@ -17,6 +17,7 @@ public class GameController : MonoBehaviour {
 	public float intervalAppearance = 1.0f;
 	private GameObject currentLips;
 	private GameObject currentScarf;
+	public bool colorsMatch;
 
 
 
@@ -36,6 +37,7 @@ public class GameController : MonoBehaviour {
 		maxWidth = targetWidth.x;
 		StartCoroutine (LipsAppear ());
 		StartCoroutine (ScarvesAppear ());
+
 	}
 
 	// Update is called once per frame
@@ -47,6 +49,8 @@ public class GameController : MonoBehaviour {
 
 
 	}
+
+
 
 	IEnumerator LipsAppear () {
 		
@@ -71,10 +75,26 @@ public class GameController : MonoBehaviour {
 			Vector3 scarvesPosition = new Vector3 (0.381f, -0.633f);
 			currentScarf = Instantiate (scarves[UnityEngine.Random.Range(0,4)], scarvesPosition, Quaternion.identity);
 			yield return new WaitForSeconds (intervalAppearance);
-			Destroy (currentScarf);
+
+
+				if (currentScarf.tag == currentLips.tag) {
+					colorsMatch = true;
+					Debug.Log ("You have a match!");
+					Destroy (currentScarf);
+
+				} else {
+					colorsMatch = false;
+					Debug.Log ("No match");
+					Destroy (currentScarf);
+				}
+				
+
+
+			//Destroy (currentScarf);
 		}
 
 	}
 
-	
+
+
 }
