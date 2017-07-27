@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour {
 
@@ -9,6 +10,10 @@ public class GameController : MonoBehaviour {
 
 	public GameObject[] lips;
 	public GameObject[] scarves;
+
+	public Button matchingButton;
+
+	public static int score;
 
 	//public int lipsAppear;
 
@@ -25,6 +30,10 @@ public class GameController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		
+		if (matchingButton != null)
+		{
+			matchingButton.onClick.AddListener(TaskOnClick);
+		}
 
 		if (cam == null) {
 			cam = Camera.main;
@@ -50,6 +59,18 @@ public class GameController : MonoBehaviour {
 
 	}
 
+	void TaskOnClick(){
+		if (colorsMatch == true) {
+			score += 1;
+			Debug.Log ("You have clicked the button and got a score!");
+		}
+		else {
+			score -= 1;
+			Debug.Log ("You have clicked the button, but the colors don't match!");
+		}
+
+
+	}
 
 
 	IEnumerator LipsAppear () {

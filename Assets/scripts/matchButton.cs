@@ -8,11 +8,11 @@ public class matchButton : MonoBehaviour {
 
 	public static int score;
 
-	MatchScript matchInstance;
+	GameController roundInstance;
 
 	void Start () {
 
-		matchInstance = GetComponent<MatchScript>();
+		roundInstance = GetComponent<GameController>();
 		
 		if (matchingButton != null)
 		{
@@ -21,14 +21,12 @@ public class matchButton : MonoBehaviour {
 	}
 
 	void TaskOnClick(){
-		if (matchInstance.colorsMatch == true) {
+		if (roundInstance.colorsMatch == true) {
 			score += 1;
-			matchingButton.onClick.RemoveListener (TaskOnClick);
 			Debug.Log ("You have clicked the button and got a score!");
 		}
 		else {
 			score -= 1;
-			matchingButton.onClick.RemoveListener (TaskOnClick);
 			Debug.Log ("You have clicked the button, but the colors don't match!");
 	}
 
