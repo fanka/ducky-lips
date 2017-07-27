@@ -13,8 +13,10 @@ public class GameController : MonoBehaviour {
 	//public int lipsAppear;
 
 	private float maxWidth;
-
 	public float timeLeft = 20.0f;
+	public float intervalAppearance = 1.0f;
+	private GameObject currentLips;
+	private GameObject currentScarf;
 
 
 
@@ -53,8 +55,9 @@ public class GameController : MonoBehaviour {
 		while (timeLeft>0) {
 			Vector3 lipsPosition = new Vector3 (0.06f,1.73f);
 
-			Instantiate (lips[UnityEngine.Random.Range(0,4)], lipsPosition, Quaternion.identity);
-			yield return new WaitForSeconds (1.0f);
+			currentLips = Instantiate (lips[UnityEngine.Random.Range(0,4)], lipsPosition, Quaternion.identity);
+			yield return new WaitForSeconds (intervalAppearance);
+			Destroy (currentLips);
 		}
 
 	}
@@ -66,8 +69,9 @@ public class GameController : MonoBehaviour {
 
 		while (timeLeft>0) {
 			Vector3 scarvesPosition = new Vector3 (0.381f, -0.633f);
-			Instantiate (scarves[UnityEngine.Random.Range(0,4)], scarvesPosition, Quaternion.identity);
-			yield return new WaitForSeconds (1.0f);
+			currentScarf = Instantiate (scarves[UnityEngine.Random.Range(0,4)], scarvesPosition, Quaternion.identity);
+			yield return new WaitForSeconds (intervalAppearance);
+			Destroy (currentScarf);
 		}
 
 	}
